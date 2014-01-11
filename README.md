@@ -13,13 +13,22 @@ From a clean Ubuntu 13.10 installation, run the following commands:
     sudo apt-get install openssh-server screen git
     sudo apt-get install fglrx-updates fglrx-amdcccle-updates fglrx-updates-dev
     sudo aticonfig --adapter=all --initial
+    sudo adduser miner admin <-- take defaults for most things but be sure to add a password
     sudo reboot
 
-Once the system has come backup and you are logged in again:
-    sudo adduser miner  <-- take defaults for most things
-    sudo miner
-    cd /home/miner
+Once the system has come backup, login as the new user miner then run:
     git clone https://github.com/Griffitsj/cgminerbootstrap.git
     cd cgminerbootstrap
-    exit
-    ./install.sh
+    sudo ./install.sh
+    sudo reboot
+
+CgMiner will start 30 seconds after rebooting.  To monitor it login as miner again and enter the command cgm.
+
+
+Inspiration taken from: http://www.cryptobadger.com/2013/04/build-a-litecoin-mining-rig-linux/ 
+
+If you found this project helpful then please consider a small donation:
+
+    BTC: 18sKBKSHfq6eYHFJQVDCg7AjtnsRyimWa9
+    DOGE: DEBZaB1XCTQdkm6ySpTRQ1WLoHUXKYdKrV
+
