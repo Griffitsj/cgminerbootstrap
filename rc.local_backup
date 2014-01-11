@@ -10,5 +10,4 @@
 # bits.
 #
 # By default this script does nothing.
-/home/miner/cgminerbootstrap/miner_launcher.sh 30 &
 exit 0

@@ -29,6 +29,7 @@ Inspiration taken from: http://www.cryptobadger.com/2013/04/build-a-litecoin-min
 
 If you found this project helpful then please consider a small donation:
 
-    BTC: 18sKBKSHfq6eYHFJQVDCg7AjtnsRyimWa9
-    DOGE: DEBZaB1XCTQdkm6ySpTRQ1WLoHUXKYdKrV
+    BTC:  1Nr38qvx2YCaahfxgD8sGsMHG2Roua8pib
+    LTC:  
+    DOGE: DJ1TMApNDSyH9FVwKdiBNCow6n3arAi8zn
 
