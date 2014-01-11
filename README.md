@@ -10,16 +10,16 @@ You should modify this cgminer.conf to use the pool of your choice and optimise 
 Pre-Requisites
 ==============
 From a clean Ubuntu 13.10 installation, run the following commands:
-	sudo apt-get install openssh-server screen git
-	sudo apt-get install fglrx-updates fglrx-amdcccle-updates fglrx-updates-dev
-	sudo aticonfig --adapter=all --initial
-	sudo reboot
+    sudo apt-get install openssh-server screen git
+    sudo apt-get install fglrx-updates fglrx-amdcccle-updates fglrx-updates-dev
+    sudo aticonfig --adapter=all --initial
+    sudo reboot
 
 Once the system has come backup and you are logged in again:
-sudo adduser miner  <-- take defaults for most things
-sudo miner
-cd /home/miner
-git clone https://github.com/Griffitsj/cgminerbootstrap.git
-cd cgminerbootstrap
-exit
-./install.sh
+    sudo adduser miner  <-- take defaults for most things
+    sudo miner
+    cd /home/miner
+    git clone https://github.com/Griffitsj/cgminerbootstrap.git
+    cd cgminerbootstrap
+    exit
+    ./install.sh
