@@ -1,19 +1,19 @@
-#!/bin/sh
-if [ ! -d "/home/miner/.cgminer" ]; then
-  mkdir /home/miner/.cgminer
-fi
-
-if [ -f config/cgminer.`hostname`.conf ]; then
-  FILENAME_TO_TEST=config/cgminer.`hostname`.conf 
+#!/bin/bash
+source /etc/cgminerbootstraprc
+sudo -su $cguser
+source /etc/cgminerbootstraprc
+if [ -f $cgdir/config/cgminer.`hostname`.conf ]; then
+  FILENAME_TO_TEST=$cgdir/config/cgminer.`hostname`.conf 
 else
-  FILENAME_TO_TEST=config/cgminer.conf
+  FILENAME_TO_TEST=$cgdir/config/cgminer.conf
 fi
-
-cd /home/miner/cgminerbootstrap
-git pull origin master
-if [ $FILENAME_TO_TEST -nt /home/miner/.cgminer/cgminer.conf ]; then
+cd $cgir
+git pull
+if [ $FILENAME_TO_TEST -nt /etc/cgminer.conf ]; then
   echo "restarting cgminer with new config"
-  cp $FILENAME_TO_TEST /home/miner/.cgminer/cgminer.conf
+  echo cp $FILENAME_TO_TEST /etc/cgminer.conf
+  cp $FILENAME_TO_TEST /etc/cgminer.conf
   killall cgminer
-  su miner -c ./miner_launcher.sh 10 &
+  $cgdir/miner_launcher.sh 10 &
 fi
+exit

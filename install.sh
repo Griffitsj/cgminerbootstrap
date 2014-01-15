@@ -4,21 +4,29 @@ if [ ! -d backupfiles ]; then
   mkdir backupfiles
 fi
 
-# add cgminer.conf
-if [ ! -d /home/miner/.cgminer ]; then
-  mkdir /home/miner/.cgminer
+if [ -f /etc/cgminerbootstraprc ]; then
+  cp /etc/cgminerbootstraprc backupfiles
 fi
 
-if [ -f /home/miner/.cgminer/cgminer.conf ]; then
-  cp /home/miner/.cgminer/cgminer.conf backupfiles/cgminer.conf_backup
+echo cguser=$SUDO_USER > /etc/cgminerbootstraprc
+echo cgdir=`pwd` >> /etc/cgminerbootstraprc
+echo cguserdir=$HOME >> /etc/cgminerbootstraprc
+
+# add cgminer.conf
+if [ ! -d ~/.cgminer ]; then
+  mkdir ~/.cgminer
+fi
+
+if [ -f /etc/cgminer.conf ]; then
+  cp /etc/cgminer.conf backupfiles/cgminer.conf
 fi
 
 if [ -f config/cgminer.`hostname`.conf ]; then
-  echo "copying config/cgminer.`hostname`.conf to .cgminer/cgminer.conf"
-  cp config/cgminer.`hostname`.conf /home/miner/.cgminer/cgminer.conf
+  echo "copying config/cgminer.`hostname`.conf to /etc/cgminer.conf"
+  cp config/cgminer.`hostname`.conf /etc/cgminer.conf
 else
-  echo "copying config/cgminer.conf to .cgminer/cgminer.conf"
-  cp config/cgminer.conf /home/miner/.cgminer/cgminer.conf
+  echo "copying config/cgminer.conf to /etc/cgminer.conf"
+  cp config/cgminer.conf /etc/cgminer.conf
 fi
 
 # extract cgminer
@@ -31,17 +39,16 @@ cp checkcgminerconfig.sh /etc/cron.hourly/
 
 # add a job at startup
 if ! grep -q miner_launcher.sh /etc/rc.local; then
-  echo "backing up /etc/rc.local to backupfiles/rc.local_backup"
-  cp /etc/rc.local backupfiles/rc.local_backup
+  echo "backing up /etc/rc.local to backupfiles/rc.local"
+  cp /etc/rc.local backupfiles/rc.local
   echo "updating /etc/rc.local"
   cp rc.local /etc/rc.local
 fi
 
 # update and reload .bashrc
-if ! grep -q ^alias\ cgm /home/miner/.bashrc; then
-  echo "backing up /home/miner/.bashrc to backupfiles/bashrcbackup"
-  cp /home/miner/.bashrc backupfiles/bashrc_backup
+if ! grep -q ^alias\ cgm ~/.bashrc; then
+  echo "backing up ~/.bashrc to backupfiles/bashrc"
+  cp ~/.bashrc backupfiles/bashrc
   echo "updating .bashrc"
-  cat /home/miner/.bashrc bashrc > backupfiles/newbashrc
-  mv backupfiles/newbashrc /home/miner/.bashrc
+  echo "alias cgm='screen -x cgm'" >> ~/.bashrc
 fi
