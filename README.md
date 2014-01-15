@@ -13,7 +13,6 @@ From a clean Ubuntu 13.10 installation, run the following commands:
     sudo apt-get install openssh-server screen git
     sudo apt-get install fglrx-updates fglrx-amdcccle-updates fglrx-updates-dev
     sudo aticonfig --adapter=all --initial
-    sudo adduser miner admin <-- take defaults for most things but be sure to add a password
     sudo reboot
 
 Once the system has come backup, login as the new user miner then run:
